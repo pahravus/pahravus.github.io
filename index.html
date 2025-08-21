@@ -2,79 +2,194 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ravus Inc.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ravus Inc. – Built on BP Accelerators</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f5f5f5;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #2c7263, #226b85);
+      color: #fff;
+    }
+
+    header {
       text-align: center;
-      min-height: 100vh;
-      padding: 2rem;
+      padding: 2rem 1rem;
     }
 
     header img {
-      max-width: 160px;
+      max-width: 180px;
       margin-bottom: 1rem;
     }
 
-    h1 {
-      font-size: 2.8rem;
+    header h1 {
       margin: 0.5rem 0;
-      color: #2a2a2a;
-    }
-
-    p {
-      font-size: 1.2rem;
-      max-width: 640px;
-      line-height: 1.6;
-      margin: 1rem 0;
-    }
-
-    a.button {
-      display: inline-block;
-      margin-top: 1.5rem;
-      padding: 0.75rem 1.6rem;
-      background: #0056a3;
-      color: #fff;
-      text-decoration: none;
+      font-size: 2.2rem;
       font-weight: bold;
-      border-radius: 6px;
-      transition: background 0.3s ease, transform 0.2s ease;
     }
 
-    a.button:hover {
-      background: #004580;
-      transform: scale(1.05);
+    header p {
+      font-size: 1.1rem;
+      color: #e0e0e0;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      padding: 2rem;
+    }
+
+    .card-container {
+      display: flex;
+      overflow-x: auto;
+      gap: 1.5rem;
+      padding-bottom: 1rem;
+      scroll-snap-type: x mandatory;
+    }
+
+    .card {
+      flex: 0 0 320px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      padding: 1.5rem;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin: 0 0 0.8rem;
+      color: #fffb;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #f0f0f0;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .card a {
+      margin-top: 1rem;
+      display: inline-block;
+      padding: 0.6rem 1rem;
+      background: #fff;
+      color: #226b85;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.9rem;
+      text-align: center;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .card a:hover {
+      background: #226b85;
+      color: #fff;
     }
 
     footer {
-      margin-top: 2rem;
+      text-align: center;
+      padding: 2rem 1rem;
       font-size: 0.9rem;
-      color: #777;
+      background: rgba(0,0,0,0.2);
+      margin-top: 2rem;
+    }
+
+    footer a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: #fff;
+      background: #226b85;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    footer a:hover {
+      background: #2c7263;
+    }
+
+    /* Scrollbar styling */
+    .card-container::-webkit-scrollbar {
+      height: 8px;
+    }
+    .card-container::-webkit-scrollbar-thumb {
+      background: #444;
+      border-radius: 4px;
     }
   </style>
 </head>
 <body>
   <header>
     <img src="assets/ravus-logo.png" alt="Ravus Inc. Logo">
-    <h1>Ravus Inc.</h1>
+    <h1>Built on BP Accelerators</h1>
+    <p>Explore accelerators built to streamline processes and maximize business value.</p>
   </header>
+
   <main>
-    <p>
-      At Ravus Inc., we design strategic revenue management solutions, advanced billing expertise, and seamless process transformations to elevate efficiency and drive results. From advisory to implementation to managed services, our team delivers tailored value at every step.:contentReference[oaicite:4]{index=4}
-    </p>
-    <a href="mailto:info@ravusinc.com" class="button">Get in Touch</a>
+    <div class="card-container">
+      <div class="card">
+        <h2>Account Bulk Loader</h2>
+        <p>
+          Provides an out-of-the-box solution for quickly importing accounts en masse. 
+          Unlike BillingPlatform’s standard bulk loader, which requires configuration, 
+          this pre-configured tool allows users to load accounts immediately without setup, 
+          streamlining the onboarding process.
+        </p>
+        <a href="#">View Asset</a>
+      </div>
+
+      <div class="card">
+        <h2>Salesforce BillingPlatform Connector Mapping Package</h2>
+        <p>
+          A deployable, pre-configured bulk loader plus the Salesforce Sync Job and configuration. 
+          Integrates Salesforce Accounts, Products, and Pricebook Entries with BillingPlatform 
+          Accounts, Products, and the Migration Staging Table, enabling actions like creating Rating 
+          Methods and Pricing Records. Provides a baseline integration mapping to significantly 
+          accelerate Salesforce-to-BillingPlatform integration development.
+        </p>
+        <a href="#">View Asset</a>
+      </div>
+
+      <div class="card">
+        <h2>Holiday & Weekend Calendar</h2>
+        <p>
+          Ensures notifications, invoice approvals, and workflows do not fall on holidays or weekends. 
+          Supports multiple countries, each with its own holiday calendar, to ensure compliance with 
+          local schedules.
+        </p>
+        <a href="#">View Asset</a>
+      </div>
+
+      <div class="card">
+        <h2>Trial Balance with GL Detail Report</h2>
+        <p>
+          Combines a standard trial balance with the detailed transactions behind each balance. 
+          Displays account totals and check sums for reconciliation, alongside underlying journal 
+          entries with their source objects. Eliminates the need for separate balance and detail reports.
+        </p>
+        <a href="https://pahravus.github.io/BPTBReport/" target="_blank">View Asset</a>
+      </div>
+    </div>
   </main>
+
   <footer>
-    &copy; <span id="year"></span> Ravus Inc. All Rights Reserved.
+    &copy; <span id="year"></span> Ravus Inc. · Built on BP <br>
+    <a href="https://www.ravusinc.com/" target="_blank">Back to RavusInc.com</a>
   </footer>
+
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
