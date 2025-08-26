@@ -90,9 +90,36 @@
       font-size: 0.9rem;
       text-align: center;
       transition: background 0.3s ease, color 0.3s ease;
+      cursor: pointer;
     }
 
     .card a:hover {
+      background: #226b85;
+      color: #fff;
+    }
+
+    #form-container {
+      display: none;
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    #download-link {
+      display: none;
+      margin-top: 20px;
+    }
+
+    #download-link a {
+      padding: 0.8rem 1.2rem;
+      background: #fff;
+      color: #226b85;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    #download-link a:hover {
       background: #226b85;
       color: #fff;
     }
@@ -180,18 +207,41 @@
           Displays account totals and check sums for reconciliation, alongside underlying journal 
           entries with their source objects. Eliminates the need for separate balance and detail reports.
         </p>
-        <a href="https://pahravus.github.io/BPTBReport/" target="_blank">View Asset</a>
+        <a onclick="showForm()">View Asset</a>
       </div>
     </div>
-  </main>
 
-  <footer>
-    &copy; <span id="year"></span> Ravus Inc. · Built on BP <br>
-    <a href="https://www.ravusinc.com/" target="_blank">Back to RavusInc.com</a>
-  </footer>
+    <!-- Form + Download link -->
+<div id="form-wrapper" style="text-align:center;">
+  <iframe id="bp-form" width="640px" height="480px"
+    src="https://forms.microsoft.com/Pages/ResponsePage.aspx?id=RmQ2bsZx6EKaG2OZI31L-NTxPEG0Sv5FhxR-6-w7-j5UNkZTN0g5UlY4TVo3MEE3UVNMREFVVUFHMy4u&embed=true"
+    frameborder="0" marginwidth="0" marginheight="0" 
+    style="border: none; max-width:100%; max-height:100vh"
+    allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen>
+  </iframe>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <!-- Hidden Download Link -->
+  <div id="download-link" style="display:none; margin-top:20px;">
+    <a href="https://your-link.com/Ravus-Accelerators-Overview.pdf" target="_blank"
+       style="padding: 0.8rem 1.2rem; background: #fff; color:#226b85; border-radius:6px; font-weight:bold; text-decoration:none;">
+       📥 Download Accelerator Overview
+    </a>
+  </div>
+</div>
+
+<script>
+  const formIframe = document.getElementById("bp-form");
+  formIframe.addEventListener("load", function() {
+    try {
+      // When the form reloads with "Thank You" message, show the download link
+      if (formIframe.contentWindow.document.body.innerText.includes("Thank you")) {
+        document.getElementById("download-link").style.display = "block";
+      }
+    } catch (e) {
+      // Microsoft Forms is cross-origin, so sometimes this fails
+      console.warn("Unable to detect form submission inside iframe. Alternative: redirect users to a custom thank-you page.");
+    }
+  });
+</script>
 </body>
 </html>
