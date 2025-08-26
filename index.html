@@ -104,26 +104,6 @@
       text-align: center;
     }
 
-    #download-link {
-      display: none;
-      margin-top: 20px;
-    }
-
-    #download-link a {
-      padding: 0.8rem 1.2rem;
-      background: #fff;
-      color: #226b85;
-      border-radius: 6px;
-      font-weight: bold;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    #download-link a:hover {
-      background: #226b85;
-      color: #fff;
-    }
-
     footer {
       text-align: center;
       padding: 2rem 1rem;
@@ -169,79 +149,57 @@
     <div class="card-container">
       <div class="card">
         <h2>Account Bulk Loader</h2>
-        <p>
-          Provides an out-of-the-box solution for quickly importing accounts en masse. 
-          Unlike BillingPlatform’s standard bulk loader, which requires configuration, 
-          this pre-configured tool allows users to load accounts immediately without setup, 
-          streamlining the onboarding process.
-        </p>
-        <a href="#">View Asset</a>
+        <p>Provides an out-of-the-box solution for quickly importing accounts en masse...</p>
+        <a onclick="showForm('Account Bulk Loader')">View Asset</a>
       </div>
 
       <div class="card">
         <h2>Salesforce BillingPlatform Connector Mapping Package</h2>
-        <p>
-          A deployable, pre-configured bulk loader plus the Salesforce Sync Job and configuration. 
-          Integrates Salesforce Accounts, Products, and Pricebook Entries with BillingPlatform 
-          Accounts, Products, and the Migration Staging Table, enabling actions like creating Rating 
-          Methods and Pricing Records. Provides a baseline integration mapping to significantly 
-          accelerate Salesforce-to-BillingPlatform integration development.
-        </p>
-        <a href="#">View Asset</a>
+        <p>A deployable, pre-configured bulk loader plus the Salesforce Sync Job...</p>
+        <a onclick="showForm('Salesforce Connector')">View Asset</a>
       </div>
 
       <div class="card">
         <h2>Holiday & Weekend Calendar</h2>
-        <p>
-          Ensures notifications, invoice approvals, and workflows do not fall on holidays or weekends. 
-          Supports multiple countries, each with its own holiday calendar, to ensure compliance with 
-          local schedules.
-        </p>
-        <a href="#">View Asset</a>
+        <p>Ensures notifications, invoice approvals, and workflows do not fall on holidays...</p>
+        <a onclick="showForm('Holiday Calendar')">View Asset</a>
       </div>
 
       <div class="card">
         <h2>Trial Balance with GL Detail Report</h2>
-        <p>
-          Combines a standard trial balance with the detailed transactions behind each balance. 
-          Displays account totals and check sums for reconciliation, alongside underlying journal 
-          entries with their source objects. Eliminates the need for separate balance and detail reports.
-        </p>
-        <a onclick="showForm()">View Asset</a>
+        <p>Combines a standard trial balance with the detailed transactions behind each balance...</p>
+        <a onclick="showForm('Trial Balance')">View Asset</a>
       </div>
     </div>
 
-    <!-- Form + Download link -->
-<div id="form-wrapper" style="text-align:center;">
-  <iframe id="bp-form" width="640px" height="480px"
-    src="https://forms.microsoft.com/Pages/ResponsePage.aspx?id=RmQ2bsZx6EKaG2OZI31L-NTxPEG0Sv5FhxR-6-w7-j5UNkZTN0g5UlY4TVo3MEE3UVNMREFVVUFHMy4u&embed=true"
-    frameborder="0" marginwidth="0" marginheight="0" 
-    style="border: none; max-width:100%; max-height:100vh"
-    allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen>
-  </iframe>
+    <!-- Hidden Form -->
+    <div id="form-container">
+      <iframe id="bp-form" width="640px" height="480px"
+        src="https://forms.microsoft.com/Pages/ResponsePage.aspx?id=RmQ2bsZx6EKaG2OZI31L-NTxPEG0Sv5FhxR-6-w7-j5UNkZTN0g5UlY4TVo3MEE3UVNMREFVVUFHMy4u&embed=true"
+        frameborder="0" marginwidth="0" marginheight="0"
+        style="border: none; max-width:100%; max-height:100vh"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </main>
 
-  <!-- Hidden Download Link -->
-  <div id="download-link" style="display:none; margin-top:20px;">
-    <a href="https://your-link.com/Ravus-Accelerators-Overview.pdf" target="_blank"
-       style="padding: 0.8rem 1.2rem; background: #fff; color:#226b85; border-radius:6px; font-weight:bold; text-decoration:none;">
-       📥 Download Accelerator Overview
-    </a>
-  </div>
-</div>
+  <footer>
+    &copy; <span id="year"></span> Ravus Inc. · Built on BP <br>
+    <a href="https://www.ravusinc.com/" target="_blank">Back to RavusInc.com</a>
+  </footer>
 
-<script>
-  const formIframe = document.getElementById("bp-form");
-  formIframe.addEventListener("load", function() {
-    try {
-      // When the form reloads with "Thank You" message, show the download link
-      if (formIframe.contentWindow.document.body.innerText.includes("Thank you")) {
-        document.getElementById("download-link").style.display = "block";
-      }
-    } catch (e) {
-      // Microsoft Forms is cross-origin, so sometimes this fails
-      console.warn("Unable to detect form submission inside iframe. Alternative: redirect users to a custom thank-you page.");
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function showForm(assetName) {
+      const formContainer = document.getElementById("form-container");
+      formContainer.style.display = "block";
+      formContainer.scrollIntoView({ behavior: "smooth" });
+
+      // Optional: prefill asset name into the form if Microsoft Form supports querystring prefill
+      // Example: &Asset=Account%20Bulk%20Loader
+      // document.getElementById("bp-form").src = "https://forms.microsoft.com/...&Asset=" + encodeURIComponent(assetName);
     }
-  });
-</script>
+  </script>
 </body>
 </html>
